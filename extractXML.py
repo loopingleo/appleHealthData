@@ -34,6 +34,9 @@ data = pd.DataFrame(tmp_data, columns = ['creationDate','startDate','endDate','v
 all_step_counts = np.array(data.values[:,-1], dtype=int)
 all_step_dates  = np.array(data.values[:,0])
 
+plt.plot(all_step_counts)
+
+
 data.describe()
 
 steps_per_month, month_labels = [], []
@@ -52,7 +55,7 @@ for n, date, step_count in zip(range(len(all_step_dates)), all_step_dates, all_s
 
         # Average step count for current month
         steps_per_month.append(running_step_count / days_in_month)
-        month_labels.append(current_month.strftime('%b-%Y'))
+        month_labels.append(current_month.strftime('%y-%m'))
 
         # Reset the running step count and current month
         current_month = new_month
@@ -67,3 +70,4 @@ month_labels = np.array(month_labels)
 import matplotlib.pyplot as plt
 
 plt.bar(month_labels, steps_per_month)
+plt.xticks(month_labels, month_labels, rotation='vertical')
